@@ -1,16 +1,17 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Carbon\Carbon;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('invoices', [
+        'cachedInvoicesPartial' => Cache::get('partials.invoices'),
+    ]);
+});
+
+Route::get('/partials/invoices', function () {
+    return Cache::remember('partials.invoices', Carbon::parse('10 seconds'), function () {
+        return view('_invoices', [
+            'invoices' => App\Invoice::all(),
+        ])->render();
+    });
 });

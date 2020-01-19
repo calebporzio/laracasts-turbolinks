@@ -36,4 +36,24 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cacheGet($key, $default = null)
+    {
+        return cache()->get($this->cacheKey($key), $default);
+    }
+
+    public function cacheHas($key)
+    {
+        return cache()->has($this->cacheKey($key));
+    }
+
+    public function cachePut($key, $value, $ttl = null)
+    {
+        return cache()->put($this->cacheKey($key), $value, $ttl);
+    }
+
+    public function cacheKey($key)
+    {
+        return 'user-'.$this->id.'.'.$key;
+    }
 }
