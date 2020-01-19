@@ -1,5 +1,9 @@
 <?php
 
+function money($cents) {
+    return '$'.number_format(($cents/100), 2, '.', ' ');
+}
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

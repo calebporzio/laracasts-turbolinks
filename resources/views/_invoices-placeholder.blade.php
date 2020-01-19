@@ -8,7 +8,7 @@
                     {{ join(range(1, $invoiceTitleCharacterCount)) }}
                 </span>
             </td>
-            <td class="p-4 text-right font-mono font-semibold"><div class="bg-gray-300 text-transparent rounded">$12.50</div></td>
+            <td class="p-4 text-right font-mono font-semibold"><div class="bg-gray-300 text-transparent rounded">$125.50</div></td>
             <td class="p-4 text-right"><a href="#" class="text-blue-600"><div class="bg-gray-300 text-transparent rounded">Download</div></a></td>
         </tr>
     @endforeach
