@@ -1,7 +1,17 @@
 <?php
 
+use Illuminate\Support\Carbon;
+
 Route::get('/', function () {
     return view('invoices', [
-        'invoices' => App\Invoice::all(),
+        'cachedInvoicesPartial' => Cache::get('partials.invoices'),
     ]);
+});
+
+Route::get('/partials/invoices', function () {
+    return Cache::remember('partials.invoices', Carbon::parse('10 seconds'), function () {
+        return view('_invoices', [
+            'invoices' => App\Invoice::all(),
+        ])->render();
+    });
 });
